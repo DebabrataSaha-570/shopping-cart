@@ -124,6 +124,7 @@
 
         
       })
+      //  first minus button starts here 
 
       const firstMinusButton = document.getElementById("first-minus-button");
       firstMinusButton.addEventListener("click", function(){
@@ -135,7 +136,16 @@
          const firstPhone = document.getElementById("first-phone-price").innerText;
          const firstPhoneNumber = parseFloat(firstPhone);
          document.getElementById("first-phone-price").innerText = firstPhoneNumber - 1219 ;
+
+         const firstNegativeSubTotal = document.getElementById("subtotal").innerText;
+         const firstNegativeSubTotalNumber = parseFloat(firstNegativeSubTotal);
+         document.getElementById("subtotal").innerText = firstNegativeSubTotalNumber - 1219 ;
+
+         const firstNegativeTotal = document.getElementById("total").innerText;
+         const firstNegativeTotalNumber = parseFloat(firstNegativeTotal);
+         document.getElementById("total").innerText = firstNegativeTotalNumber - 1219;
       })
+         // second minus button starts here 
 
       const secondMinusButton = document.getElementById("second-minus-button");
       secondMinusButton.addEventListener("click", function(){
