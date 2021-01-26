@@ -25,7 +25,7 @@
 
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <button id="first-minus-button" class="btn btn-default"><i class="fas fa-minus"></i></button>
                            <input id="first-input" type="text" class="form-control text-center" value="1">
                            <button id="first-plus-button" class="btn btn-default"><i class="fas fa-plus"></i></button>
                         </div>
@@ -43,7 +43,7 @@
                      </div>
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <button id="second-minus-button" class="btn btn-default"><i class="fas fa-minus"></i></button>
                            <input id="second-input" type="text" class="form-control text-center" value="1">
                            <button id="second-plus-button" class="btn btn-default"><i class="fas fa-plus"></i></button>
 
@@ -103,6 +103,30 @@
          secondPhoneNumber = parseFloat(secondPhone);
          document.getElementById("second-phone-price").innerText = secondPhoneNumber + 59;
 
+      })
+
+      const firstMinusButton = document.getElementById("first-minus-button");
+      firstMinusButton.addEventListener("click", function(){
+         const firstInput = document.getElementById("first-input").value;
+         const firstInputNumber = parseFloat(firstInput);
+         const firstInputTotal = firstInputNumber - 1;
+         document.getElementById("first-input").value = firstInputTotal;
+
+         const firstPhone = document.getElementById("first-phone-price").innerText;
+         const firstPhoneNumber = parseFloat(firstPhone);
+         document.getElementById("first-phone-price").innerText = firstPhoneNumber - 1219 ;
+      })
+
+      const secondMinusButton = document.getElementById("second-minus-button");
+      secondMinusButton.addEventListener("click", function(){
+         const secondInput = document.getElementById("second-input").value;
+         const secondInputNumber = parseFloat(secondInput);
+         const secondInputTotal = secondInputNumber - 1;
+         document.getElementById("second-input").value = secondInputTotal;  
+
+         const secondPhone = document.getElementById("second-phone-price").innerText;
+         secondPhoneNumber = parseFloat(secondPhone);
+         document.getElementById("second-phone-price").innerText = secondPhoneNumber - 59;
       })
    </script>
 </body>
