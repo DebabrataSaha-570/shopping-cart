@@ -157,6 +157,14 @@
          const secondPhone = document.getElementById("second-phone-price").innerText;
          secondPhoneNumber = parseFloat(secondPhone);
          document.getElementById("second-phone-price").innerText = secondPhoneNumber - 59;
+
+         const secondNegativeSubTotal = document.getElementById("subtotal").innerText;
+         const secondNegativeSubTotalNumber = parseFloat(secondNegativeSubTotal);
+         document.getElementById("subtotal").innerText = secondNegativeSubTotalNumber - 59 ;
+
+         const secondNegativeTotal = document.getElementById("total").innerText;
+         const secondNegativeTotalNumber = parseFloat(secondNegativeTotal);
+         document.getElementById("total").innerText = secondNegativeTotalNumber - 59;
       })
    </script>
 </body>
