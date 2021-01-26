@@ -66,7 +66,7 @@
                      <div class="col-md-4 status">
                         <h5 >$ <span id="subtotal"> 1278 </span> </h5>
                         <h5>$0</h5>
-                        <h5>$1,278</h5>
+                        <h5 >$ <span id="total"> 1278</span> </h5>
                      </div>
                   </div>
                </div>
@@ -79,6 +79,8 @@
    </section>
 
    <script>
+      // first plus button starts here
+
       const firstPlusButton = document.getElementById("first-plus-button");
       firstPlusButton.addEventListener("click", function(){
          const firstInput = document.getElementById("first-input").value;
@@ -94,7 +96,9 @@
          const firstPositiveSubTotalNumber = parseFloat(firstPositiveSubTotal);
          document.getElementById("subtotal").innerText = firstPositiveSubTotalNumber + 1219 ;
 
-         const firstPositiveTotal = 
+         const firstPositiveTotal = document.getElementById("total").innerText;
+         const firstPositiveTotalNumber = parseFloat(firstPositiveTotal);
+         document.getElementById("total").innerText = firstPositiveTotalNumber + 1219;
          
       })
 
@@ -109,6 +113,13 @@
          secondPhoneNumber = parseFloat(secondPhone);
          document.getElementById("second-phone-price").innerText = secondPhoneNumber + 59;
 
+         const secondPositiveSubTotal = document.getElementById("subtotal").innerText;
+         const secondPositiveSubTotalNumber = parseFloat(secondPositiveSubTotal);
+         document.getElementById("subtotal").innerText = secondPositiveSubTotalNumber + 59 ;
+
+         const secondPositiveTotal = document.getElementById("total").innerText;
+         const secondPositiveTotalNumber = parseFloat(secondPositiveTotal);
+         document.getElementById("total").innerText = secondPositiveTotalNumber + 59;
       })
 
       const firstMinusButton = document.getElementById("first-minus-button");
