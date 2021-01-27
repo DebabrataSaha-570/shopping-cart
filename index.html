@@ -19,17 +19,17 @@
                <div class="cart-item">
                   <div class="row">
                      <div class="col-md-7 center-item">
-                        <img src="images/product-1.png" alt="">
+                        <button id="first-cross-button"><img src="images/product-1.png" alt=""></button>
                         <h5>iPhone 11 128GB Black</h5>
                      </div>
 
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button id="first-minus-button" class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input id="first-input" type="text" class="form-control text-center" value="1">
-                           <button id="first-plus-button" class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <button id="phone-decrease" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="phone-count" type="text" class="form-control text-center" value="1">
+                           <button id="phone-increase" class="btn btn-default"><i class="fas fa-plus"></i></button>
                         </div>
-                        <h5>$ <span id="first-phone-price"> 1219 </span> </h5>
+                        <h5>$ <span id="phone-total"> 1219 </span> </h5>
                         <img src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -43,12 +43,12 @@
                      </div>
                      <div class="col-md-5 center-item">
                         <div class="input-group number-spinner">
-                           <button id="second-minus-button" class="btn btn-default"><i class="fas fa-minus"></i></button>
-                           <input id="second-input" type="text" class="form-control text-center" value="1">
-                           <button id="second-plus-button" class="btn btn-default"><i class="fas fa-plus"></i></button>
+                           <button id="case-decrease" class="btn btn-default"><i class="fas fa-minus"></i></button>
+                           <input id="case-count" type="text" class="form-control text-center" value="1">
+                           <button id="case-increase" class="btn btn-default"><i class="fas fa-plus"></i></button>
 
                         </div>
-                        <h5>$ <span id="second-phone-price"> 59 </span> </h5>
+                        <h5>$ <span id="case-total"> 59 </span> </h5>
                         <img src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
@@ -64,9 +64,9 @@
                      </div>
 
                      <div class="col-md-4 status">
-                        <h5 >$ <span id="subtotal"> 1278 </span> </h5>
-                        <h5>$0</h5>
-                        <h5 >$ <span id="total"> 1278</span> </h5>
+                        <h5>$ <span id="total-price"> 1278 </span> </h5>
+                        <h5>$ <span id="tax-amount"></span> 0</h5>
+                        <h5>$ <span id="grand-total"> 1278</span> </h5>
                      </div>
                   </div>
                </div>
@@ -79,93 +79,98 @@
    </section>
 
    <script>
-      // first plus button starts here
+      // case price increase 
+      document.getElementById("case-increase").addEventListener("click", function () {
+        handleProductChange(true);
 
-      const firstPlusButton = document.getElementById("first-plus-button");
-      firstPlusButton.addEventListener("click", function(){
-         const firstInput = document.getElementById("first-input").value;
-         const firstInputNumber = parseFloat(firstInput);
-         const firstInputTotal = firstInputNumber + 1;
-         document.getElementById("first-input").value = firstInputTotal;
+      });
+      // case price decrease
+      document.getElementById("case-decrease").addEventListener("click", function () {
+         handleProductChange(false);
 
-         const firstPhone = document.getElementById("first-phone-price").innerText;
-         const firstPhoneNumber = parseFloat(firstPhone);
-         document.getElementById("first-phone-price").innerText = firstPhoneNumber + 1219 ;
+      });
+      // phone price increase 
+      document.getElementById("phone-increase").addEventListener("click",function(){
+         phoneProductChange(true);
 
-         const firstPositiveSubTotal = document.getElementById("subtotal").innerText;
-         const firstPositiveSubTotalNumber = parseFloat(firstPositiveSubTotal);
-         document.getElementById("subtotal").innerText = firstPositiveSubTotalNumber + 1219 ;
-
-         const firstPositiveTotal = document.getElementById("total").innerText;
-         const firstPositiveTotalNumber = parseFloat(firstPositiveTotal);
-         document.getElementById("total").innerText = firstPositiveTotalNumber + 1219;
-         
       })
-      //  second plus button starts here 
+      // phone price decrease
+      document.getElementById("phone-decrease").addEventListener("click",function(){
+         phoneProductChange(false);
 
-      const secondPlusButton = document.getElementById("second-plus-button");
-      secondPlusButton.addEventListener("click", function(){
-         const secondInput = document.getElementById("second-input").value;
-         const secondInputNumber = parseFloat(secondInput);
-         const secondInputTotal = secondInputNumber + 1;
-         document.getElementById("second-input").value = secondInputTotal;
-
-         const secondPhone = document.getElementById("second-phone-price").innerText;
-         secondPhoneNumber = parseFloat(secondPhone);
-         document.getElementById("second-phone-price").innerText = secondPhoneNumber + 59;
-
-         const secondPositiveSubTotal = document.getElementById("subtotal").innerText;
-         const secondPositiveSubTotalNumber = parseFloat(secondPositiveSubTotal);
-         document.getElementById("subtotal").innerText = secondPositiveSubTotalNumber + 59 ;
-
-         const secondPositiveTotal = document.getElementById("total").innerText;
-         const secondPositiveTotalNumber = parseFloat(secondPositiveTotal);
-         document.getElementById("total").innerText = secondPositiveTotalNumber + 59;
-
-        
       })
-      //  first minus button starts here 
+      // phone product change function 
+      function phoneProductChange(isIncrease){
+         const phoneInput = document.getElementById("phone-count").value;
+         const phoneCount = parseInt(phoneInput);
+         let phoneNewCount = 0;
+         if(isIncrease == true){
+            phoneNewCount = phoneCount + 1;
+         }
+         if(isIncrease == false && phoneCount > 0){
+            phoneNewCount = phoneCount - 1;
+         }
+         document.getElementById("phone-count").value = phoneNewCount;
+         phoneTotal = phoneNewCount * 1219;
+         document.getElementById("phone-total").innerText = phoneTotal;
+         calculateTotal();
+      }
+      // case product change function 
+      function handleProductChange(isIncrease){
+         const caseInput = document.getElementById("case-count");
+         const caseCount = parseInt(caseInput.value);
+         let caseNewCount = 0;
+         if(isIncrease == true){
+            caseNewCount = caseCount + 1;
+         }
+         if(isIncrease == false && caseCount > 0){
+            caseNewCount = caseCount - 1;
+         }
+         caseInput.value = caseNewCount;
+         const caseTotal = caseNewCount * 59;
+         document.getElementById("case-total").innerText = caseTotal;
+         calculateTotal();
+      }
+      function calculateTotal(){
+         const phoneInput = document.getElementById("phone-count");
+         const phoneCount = parseInt(phoneInput.value);
 
-      const firstMinusButton = document.getElementById("first-minus-button");
-      firstMinusButton.addEventListener("click", function(){
-         const firstInput = document.getElementById("first-input").value;
-         const firstInputNumber = parseFloat(firstInput);
-         const firstInputTotal = firstInputNumber - 1;
-         document.getElementById("first-input").value = firstInputTotal;
+         const caseInput = document.getElementById("case-count");
+         const caseCount = parseInt(caseInput.value);
 
-         const firstPhone = document.getElementById("first-phone-price").innerText;
-         const firstPhoneNumber = parseFloat(firstPhone);
-         document.getElementById("first-phone-price").innerText = firstPhoneNumber - 1219 ;
+         const totalPrice = phoneCount * 1219 + caseCount *59;
+         document.getElementById("total-price").innerText = totalPrice;
 
-         const firstNegativeSubTotal = document.getElementById("subtotal").innerText;
-         const firstNegativeSubTotalNumber = parseFloat(firstNegativeSubTotal);
-         document.getElementById("subtotal").innerText = firstNegativeSubTotalNumber - 1219 ;
+         const tax = Math.round(totalPrice * 0.1);
+         document.getElementById("tax-amount").innerText = tax;
 
-         const firstNegativeTotal = document.getElementById("total").innerText;
-         const firstNegativeTotalNumber = parseFloat(firstNegativeTotal);
-         document.getElementById("total").innerText = firstNegativeTotalNumber - 1219;
-      })
-         // second minus button starts here 
+         const grandTotal = totalPrice + tax;
+         document.getElementById("grand-total").innerText = grandTotal;
+      }
 
-      const secondMinusButton = document.getElementById("second-minus-button");
-      secondMinusButton.addEventListener("click", function(){
-         const secondInput = document.getElementById("second-input").value;
-         const secondInputNumber = parseFloat(secondInput);
-         const secondInputTotal = secondInputNumber - 1;
-         document.getElementById("second-input").value = secondInputTotal;  
 
-         const secondPhone = document.getElementById("second-phone-price").innerText;
-         secondPhoneNumber = parseFloat(secondPhone);
-         document.getElementById("second-phone-price").innerText = secondPhoneNumber - 59;
 
-         const secondNegativeSubTotal = document.getElementById("subtotal").innerText;
-         const secondNegativeSubTotalNumber = parseFloat(secondNegativeSubTotal);
-         document.getElementById("subtotal").innerText = secondNegativeSubTotalNumber - 59 ;
 
-         const secondNegativeTotal = document.getElementById("total").innerText;
-         const secondNegativeTotalNumber = parseFloat(secondNegativeTotal);
-         document.getElementById("total").innerText = secondNegativeTotalNumber - 59;
-      })
+      // document.getElementById("case-increase").addEventListener("click",function(){
+      //    const caseInput = document.getElementById("case-count");
+      //    const caseCount = parseInt(caseInput.value);
+      //    const caseNewCount = caseCount + 1;
+      //    caseInput.value  = caseNewCount;
+      //    const caseTotal = caseNewCount * 59;
+      //    document.getElementById("case-total").innerText = caseTotal;
+
+      // });
+
+      // document.getElementById("case-decrease").addEventListener("click",function(){
+      //    const caseInput = document.getElementById("case-count");
+      //    const caseCount = parseInt(caseInput.value);
+      //    const caseNewCount = caseCount - 1;
+      //    caseInput.value  = caseNewCount;
+      //    const caseTotal = caseNewCount * 59;
+      //    document.getElementById("case-total").innerText = caseTotal;
+
+      // });
+
    </script>
 </body>
 
